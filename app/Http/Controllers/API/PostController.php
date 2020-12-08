@@ -50,7 +50,14 @@ class PostController extends Controller
 	* @return \Illuminate\Http\Response
 	*/
 	public function update(Request $request, $id) {
-		//
+		$post = Post::whereId($id)->firstOrFail();
+		$post->update([
+			'title'=>$request->get('title'),
+			'description'=>$request->get('description')
+			]);
+			return response()->json([
+				'msg'=>'Update Success'
+				],200);
 	}
 
 	/**
@@ -60,6 +67,10 @@ class PostController extends Controller
 	* @return \Illuminate\Http\Response
 	*/
 	public function destroy($id) {
-		//
+		$post = Post::whereId($id)->firstOrFail();
+		$post->delete();
+		return response()->json([
+			'msg'=>'Delete Success'
+			],200);
 	}
 }
