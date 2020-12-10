@@ -12,9 +12,10 @@ axios.get("/api/posts")
     <td>${posts.title}</td>
     <td>${posts.description}</td>
     <td>
-    <a href="" class="btn btn-outline-info btn-sm">
-    Edit
-    </a>
+ <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#updatePost">
+  Edit
+</button>
+
     </td>
     <td>
     <a href="" class="btn btn-danger btn-sm">
@@ -40,12 +41,8 @@ postInputForm.onsubmit = function(e) {
   })
   .then((res)=> {
     /*@return if title is empty */
-    if (titleInput.value == '') {
-      document.querySelector("#titleError").innerHTML = `${res.data.title}`;
-    }
-    if (descInput.value == '') {
-      document.querySelector("#descError").innerHTML = `${res.data.description}`;
-    }
+      document.querySelector("#titleError").innerHTML = titleInput.value === '' ? `${res.data.title}` : '';
+      document.querySelector("#descError").innerHTML = descInput.value == '' ?`${res.data.description}` : '';
     if(res.data.msg){
     let successMsg = `
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -54,6 +51,7 @@ postInputForm.onsubmit = function(e) {
     </div>
     `;
     document.querySelector('#status').innerHTML = successMsg;
+    postInputForm.reset();
     }
   })
   .catch((errors)=> {

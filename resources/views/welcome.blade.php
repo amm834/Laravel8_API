@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Laravel8_A</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/eslint@7.5.0/lib/api.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
@@ -53,6 +54,10 @@
       </div>
       <!-- Post Create Form End -->
     </div>
+    <!-- Post Update Modal
+                <!-- Modal -->
+    @include('edit')
+    <!-- Post Update Modal End -->
   </div>
 
   <script src="{{asset('js/eruda.js')}}"></script>
