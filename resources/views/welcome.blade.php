@@ -9,7 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-  
+
   <div class="container my-3">
     <div class="row">
       <div class="col-md-6">
@@ -41,10 +41,12 @@
           <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control" id="title">
+            <em id="titleError" class="text-danger"></em>
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea name="description" id="description" rows="5" class="form-control"></textarea>
+            <div id="descError" class="text-danger"></div>
           </div>
           <button type="submit" class="btn btn-primary">Create</button>
         </form>
@@ -52,8 +54,6 @@
       <!-- Post Create Form End -->
     </div>
   </div>
-
-
 
   <script src="{{asset('js/eruda.js')}}"></script>
   <script src="{{asset('js/axios.js')}}"></script>

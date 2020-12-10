@@ -9,7 +9,7 @@ axios.get("/api/posts")
     tbody.innerHTML += `
     <tr>
     <th scope="row">${posts.id}</th>
-    <td>Noope World!</td>
+    <td>${posts.title}</td>
     <td>${posts.description}</td>
     <td>
     <a href="" class="btn btn-outline-info btn-sm">
@@ -39,14 +39,22 @@ postInputForm.onsubmit = function(e) {
     'description': descInput.value
   })
   .then((res)=> {
+    /*@return if title is empty */
+    if (titleInput.value == '') {
+      document.querySelector("#titleError").innerHTML = `${res.data.title}`;
+    }
+    if (descInput.value == '') {
+      document.querySelector("#descError").innerHTML = `${res.data.description}`;
+    }
+    if(res.data.msg){
     let successMsg = `
     <div class="alert alert-success alert-dismissible fade show" role="alert">
     ${res.data.msg}
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     `;
     document.querySelector('#status').innerHTML = successMsg;
-    console.log(res);
+    }
   })
   .catch((errors)=> {
     console.log(errors.response)

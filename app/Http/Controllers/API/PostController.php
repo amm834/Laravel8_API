@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Validator;
 class PostController extends Controller
 {
   /**
@@ -24,11 +25,23 @@ class PostController extends Controller
   * @return \Illuminate\Http\Response
   */
   public function store(Request $request) {
-    $data = Post::create([
-      'title' => $request->get('title'),
-      'description' => $request->get('description')
-    ]);
-    return response()->json([$data,'msg'=>'Post Created Successfully.'], 200);
+    /*@return if we get errs */
+    $messages = [
+      'required' => 'The :attribute field is required.',
+    ];
+    $validator = Validator::make($request->all(), [
+      'title' => 'required',
+      'description' => 'required'
+    ], $messages);
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 200);
+    } else {
+      $data = Post::create([
+        'title' => $request->get('title'),
+        'description' => $request->get('description')
+      ]);
+      return response()->json([$data, 'msg' => 'Post Created Successfully.'], 201);
+    }
   }
 
   /**
