@@ -18,9 +18,9 @@ axios.get("/api/posts")
 
     </td>
     <td>
-    <a href="" class="btn btn-danger btn-sm">
+    <button class="btn btn-danger btn-sm" onclick="postDelete(${posts.id})">
     Delete
-    </a>
+    </button>
     </td>
     </tr>
 
@@ -100,4 +100,19 @@ postEditForm.onsubmit = function(e) {
   .catch(errors=>console.log(errors.response))
 }
 
+function postDelete(id) {
+  axios.delete(`/api/posts/${id}`)
+  .then((response)=>{
+    let updateSuccessMsg = `
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    ${response.data.msg}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    `;
+    // Hide Modal When Data is Updated
+    document.querySelector('#updateSuccess').innerHTML = updateSuccessMsg;
+  
 
+  })
+  .catch((errors)=>console.log(errors.response));
+}
