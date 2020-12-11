@@ -15,6 +15,10 @@
     <div class="row">
       <div class="col-md-6">
         <h6 class="display-6 my-2">Posts</h6>
+        
+        <!-- Update Success Alert -->
+        <div id="updateSuccess"></div>
+        <!-- Update Success Alert End -->
         <!-- Posts Tables -->
         <div class="table-responsive">
           <table class="table table-hover">

@@ -59,16 +59,42 @@ postInputForm.onsubmit = function(e) {
   })
 }
 
-let postEditForm =  document.forms['postEditForm'];
+
+let postEditForm = document.forms['postEditForm'];
 let editTitle = postEditForm['title'];
 let editDesc = postEditForm['description'];
-function postEdit(id){
+let updateId;
+// Post Edit Data Show
+function postEdit(id) {
+  updateId = id;
   axios.get(`api/posts/${id}`)
-  .then((res)=>{
+  .then((res)=> {
     editTitle.value = res.data.title;
     editDesc.value = res.data.description;
   })
-  .catch(errors=>{
+  .catch(errors=> {
     console.log(errors.response);
   })
 }
+
+// Post Update
+postEditForm.onsubmit = function(e) {
+  e.preventDefault();
+  axios.put(`/api/posts/${updateId}`,
+    {
+      title: editTitle.value,
+      description: editDesc.value
+    })
+  .then((res)=> {
+    let updateSuccessMsg = `
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    ${res.data.msg}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    `;
+    document.querySelector('#updateSuccess').innerHTML = updateSuccessMsg;
+  })
+  .catch(errors=>console.log(errors.response))
+}
+
+ 
