@@ -40,7 +40,7 @@ class PostController extends Controller
         'title' => $request->get('title'),
         'description' => $request->get('description')
       ]);
-      return response()->json([$data, 'msg' => 'Post Created Successfully.'], 201);
+      return response()->json(['post'=>$data, 'msg' => 'Post Created Successfully.'], 201);
     }
   }
 

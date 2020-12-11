@@ -2,29 +2,14 @@
 eruda.init();
 
 /* api */
+
 let tbody = document.querySelector("#tbody");
+
 axios.get("/api/posts")
 .then((response)=> {
   response.data.forEach((posts)=> {
-    tbody.innerHTML += `
-    <tr>
-    <th scope="row">${posts.id}</th>
-    <td>${posts.title}</td>
-    <td>${posts.description}</td>
-    <td>
-    <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#updatePostModal" onclick="postEdit(${posts.id})">
-    Edit
-    </button>
-
-    </td>
-    <td>
-    <button class="btn btn-danger btn-sm" onclick="postDelete(${posts.id})">
-    Delete
-    </button>
-    </td>
-    </tr>
-
-    `;
+    // @args pass data
+    showData(posts);
   })
 })
 .catch((errors)=>console.log(errors));
@@ -40,6 +25,8 @@ postInputForm.onsubmit = function(e) {
     'description': descInput.value
   })
   .then((res)=> {
+    // @args show data when data created
+    showData(res.data.post);
     /*@return if title is empty */
     document.querySelector("#titleError").innerHTML = titleInput.value === '' ? `${res.data.title}`: '';
     document.querySelector("#descError").innerHTML = descInput.value == '' ?`${res.data.description}`: '';
@@ -102,7 +89,7 @@ postEditForm.onsubmit = function(e) {
 
 function postDelete(id) {
   axios.delete(`/api/posts/${id}`)
-  .then((response)=>{
+  .then((response)=> {
     let updateSuccessMsg = `
     <div class="alert alert-success alert-dismissible fade show" role="alert">
     ${response.data.msg}
@@ -111,8 +98,30 @@ function postDelete(id) {
     `;
     // Hide Modal When Data is Updated
     document.querySelector('#updateSuccess').innerHTML = updateSuccessMsg;
-  
+
 
   })
   .catch((errors)=>console.log(errors.response));
+}
+
+
+// Helper function
+function showData(posts) {
+  tbody.innerHTML += `
+  <tr>
+  <th scope="row">${posts.id}</th>
+  <td>${posts.title}</td>
+  <td>${posts.description}</td>
+  <td>
+  <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#updatePostModal" onclick="postEdit(${posts.id})">
+  Edit
+  </button>
+  </td>
+  <td>
+  <button class="btn btn-danger btn-sm" onclick="postDelete(${posts.id})">
+  Delete
+  </button>
+  </td>
+  </tr>
+  `;
 }
