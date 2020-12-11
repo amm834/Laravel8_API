@@ -12,7 +12,7 @@ axios.get("/api/posts")
     <td>${posts.title}</td>
     <td>${posts.description}</td>
     <td>
-    <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#updatePost" onclick="postEdit(${posts.id})">
+    <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#updatePostModal" onclick="postEdit(${posts.id})">
     Edit
     </button>
 
@@ -78,6 +78,8 @@ function postEdit(id) {
 }
 
 // Post Update
+// Get Bootstrap Modal
+
 postEditForm.onsubmit = function(e) {
   e.preventDefault();
   axios.put(`/api/posts/${updateId}`,
@@ -92,9 +94,10 @@ postEditForm.onsubmit = function(e) {
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     `;
+    // Hide Modal When Data is Updated
     document.querySelector('#updateSuccess').innerHTML = updateSuccessMsg;
   })
   .catch(errors=>console.log(errors.response))
 }
 
- 
+
