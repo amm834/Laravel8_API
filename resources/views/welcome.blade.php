@@ -57,7 +57,7 @@
       <!-- Post Create Form End -->
     </div>
     <!-- Post Update Modal
-                        <!-- Modal -->
+                            <!-- Modal -->
     <div class="modal fade" id="updatePostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -91,7 +91,8 @@
   </div>
 
   <script src="{{asset('js/eruda.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="{{asset('js/vconsole.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="{{asset('js/axios.js')}}"></script>
   <script src="{{asset('js/app.js')}}"></script>
 </body>

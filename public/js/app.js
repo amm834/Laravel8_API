@@ -4,13 +4,12 @@ eruda.init();
 /* api */
 
 let tbody = document.querySelector("#tbody");
-
 axios.get("/api/posts")
 .then((response)=> {
   response.data.forEach((posts)=> {
     // @args pass data
     showData(posts);
-  })
+  });
 })
 .catch((errors)=>console.log(errors));
 
@@ -66,7 +65,6 @@ function postEdit(id) {
 
 // Post Update
 // Get Bootstrap Modal
-
 postEditForm.onsubmit = function(e) {
   e.preventDefault();
   axios.put(`/api/posts/${updateId}`,
@@ -108,7 +106,7 @@ function postDelete(id) {
 // Helper function
 function showData(posts) {
   tbody.innerHTML += `
-  <tr>
+  <tr class="titles">
   <th scope="row">${posts.id}</th>
   <td>${posts.title}</td>
   <td>${posts.description}</td>
@@ -125,3 +123,5 @@ function showData(posts) {
   </tr>
   `;
 }
+
+let titles = document.getElementsByClassName('titles');
